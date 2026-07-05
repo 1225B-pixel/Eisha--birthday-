@@ -1,1 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy 18th Birthday Eishaa ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(135deg,#ffd6e7,#f7d9ff,#ffe7d4,#ffffff);
+
+overflow-x:hidden;
+
+color:#222;
+
+}
+
+section{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:50px;
+
+}
+
+button{
+
+cursor:pointer;
+
+border:none;
+
+outline:none;
+
+}
+
+.hidden{
+
+display:none;
+
+}
+body::before{
+
+content:"";
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:
+
+radial-gradient(circle at 10% 20%,rgba(255,255,255,.5),transparent 35%),
+
+radial-gradient(circle at 80% 10%,rgba(255,192,203,.35),transparent 40%),
+
+radial-gradient(circle at 50% 90%,rgba(255,215,230,.5),transparent 35%);
+
+animation:bgMove 12s linear infinite alternate;
+
+z-index:-2;
+
+}
+
+@keyframes bgMove{
+
+from{
+
+transform:translateY(-30px);
+
+}
+
+to{
+
+transform:translateY(30px);
+
+}
+
+  }
+#passwordPage{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:
+
+linear-gradient(135deg,#111,#1e1e1e,#000);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+}
+
+.passwordBox{
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(18px);
+
+padding:40px;
+
+border-radius:25px;
+
+width:90%;
+
+max-width:420px;
+
+text-align:center;
+
+box-shadow:0 0 40px rgba(255,105,180,.35);
+
+}
+
+.passwordBox h1{
+
+color:white;
+
+font-family:'Great Vibes',cursive;
+
+font-size:50px;
+
+margin-bottom:15px;
+
+}
+
+.passwordBox p{
+
+color:#ddd;
+
+margin-bottom:25px;
+
+}
+
+.passwordBox input{
+
+width:100%;
+
+padding:15px;
+
+border-radius:15px;
+
+border:none;
+
+margin-bottom:20px;
+
+font-size:18px;
+
+text-align:center;
+
+letter-spacing:4px;
+
+}
+
+.passwordBox button{
+
+width:100%;
+
+padding:15px;
+
+font-size:18px;
+
+border-radius:15px;
+
+background:#ff4d88;
+
+color:white;
+
+transition:.4s;
+
+}
+
+.passwordBox button:hover{
+
+transform:scale(1.05);
+
+background:#ff2f74;
+
+  }
+  #loading{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:#000;
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+z-index:9998;
+
+color:white;
+
+}
+
+.loaderHeart{
+
+font-size:70px;
+
+animation:pulse 1s infinite;
+
+}
+
+@keyframes pulse{
+
+50%{
+
+transform:scale(1.3);
+
+}
+
+}
+
+.loadingText{
+
+margin-top:20px;
+
+font-size:30px;
+
+font-family:'Great Vibes';
+
+color:#ffd6e7;
+
+                }
+  #hero{
+
+position:relative;
+
+text-align:center;
+
+flex-direction:column;
+
+overflow:hidden;
+
+}
+
+.heroTitle{
+
+font-size:70px;
+
+font-family:'Great Vibes';
+
+color:#ff2c75;
+
+text-shadow:0 5px 15px rgba(255,0,102,.2);
+
+}
+
+.heroSubtitle{
+
+margin-top:20px;
+
+font-size:22px;
+
+color:#444;
+
+max-width:700px;
+
+}
+
+.openBtn{
+
+margin-top:50px;
+
+padding:18px 45px;
+
+font-size:20px;
+
+border-radius:50px;
+
+background:
+
+linear-gradient(45deg,#ff2f74,#ff6da5);
+
+color:white;
+
+box-shadow:0 15px 35px rgba(255,0,102,.25);
+
+transition:.4s;
+
+}
+
+.openBtn:hover{
+
+transform:translateY(-5px) scale(1.05);
+
+  }
+  </style>
+
+</head>
+<div id="passwordPage">
+
+<div class="passwordBox">
+
+<h1>Welcome ❤️</h1>
+
+<p>Enter the secret password</p>
+
+<input
+type="password"
+id="password"
+maxlength="8"
+placeholder="********">
+
+<button onclick="checkPassword()">
+Unlock Surprise
+</button>
+
+</div>
+
+</div>
+
+
+<div id="loading">
+
+<div class="loaderHeart">
+❤️
+</div>
+
+<div class="loadingText">
+
+Happy 18th Birthday ❤️
+
+</div>
+
+</div>
+
+
+<section id="hero" class="hidden">
+
+<h2 class="heroTitle">
+
+Happy 18th Birthday
+
+<br>
+
+Eishaaaa ❤️
+
+</h2>
+
+<p class="heroSubtitle">
+
+Let me make it the most special one...
+
+</p>
+
+<button class="openBtn">
+
+Open Your Surprise
+
+</button>
+
+</section>
+<script>
+
+function checkPassword(){
+
+const pass=document.getElementById("password").value;
+
+if(pass==="09072008"){
+
+document.getElementById("passwordPage").style.display="none";
+
+document.getElementById("loading").style.display="flex";
+
+setTimeout(()=>{
+
+document.getElementById("loading").style.display="none";
+
+document.getElementById("hero").classList.remove("hidden");
+
+},3000);
+
+}
+
+else{
+
+alert("Wrong Password ❤️");
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
