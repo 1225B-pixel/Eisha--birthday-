@@ -1,301 +1,1002 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy 18th Birthday, Eishaaa 🌻</title>
-<meta name="description" content="A birthday surprise, just for you.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy 18th Birthday, Eishaaaa! ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        :root {
+            --pink: #ffb6c1;
+            --lavender: #e6e6fa;
+            --white: #ffffff;
+            --rose-gold: #b76e79;
+            --light-purple: #d8bfd8;
+            --peach: #ffdab9;
+            --red: #ff3b30;
+            --dark: #2c1a30;
+            --bg-gradient: linear-gradient(135deg, #fff0f5 0%, #f3e5f5 50%, #ffe4e1 100%);
+        }
 
-<!-- Google Fonts: Cormorant Garamond (display), Quicksand (body), Dancing Script (handwritten accents) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
 
-<link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- Global Utility Styles --- */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--rose-gold);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '🌻';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 182, 193, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(183, 110, 121, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(183, 110, 121, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--rose-gold), var(--pink));
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(183, 110, 121, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(183, 110, 121, 0.5);
+        }
+
+        /* --- 1. Password & Loading Screen --- */
+        #gatekeeper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-gradient);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .password-box h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--rose-gold);
+            margin-bottom: 20px;
+        }
+
+        .password-box input {
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border: 2px solid var(--pink);
+            border-radius: 25px;
+            text-align: center;
+            outline: none;
+            margin-bottom: 15px;
+            width: 250px;
+            letter-spacing: 2px;
+        }
+
+        #loading-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .heart-loader {
+            font-size: 4rem;
+            color: var(--red);
+            animation: beat 1s infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes beat {
+            to { transform: scale(1.2); }
+        }
+
+        /* --- Main Content Hidden Initially --- */
+        #main-content {
+            display: none;
+        }
+
+        /* --- 2. Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(circle, rgba(255,240,245,1) 0%, rgba(243,229,245,0.6) 100%);
+        }
+
+        #hero h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--rose-gold);
+        }
+
+        #hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: var(--dark);
+            margin: 10px 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* --- 4. Countdown --- */
+        #countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .time-box {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            min-width: 80px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rose-gold);
+        }
+
+        .time-box label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        /* --- 5. Love Letter Section --- */
+        .envelope-wrapper {
+            margin: 40px auto;
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: var(--pink);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0; left: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 110px solid var(--rose-gold);
+            transform-origin: top;
+            transition: transform 0.5s ease;
+            z-index: 3;
+        }
+
+        .envelope-wrapper.open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .letter-content {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            background: #fffef0;
+            padding: 20px;
+            border-radius: 5px;
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+            z-index: 2;
+            overflow: hidden;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .envelope-wrapper.open .letter-content {
+            position: relative;
+            transform: translateY(-120px);
+            height: auto;
+            max-width: 600px;
+            margin: 0 auto;
+            z-index: 5;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            padding: 40px;
+            border: 1px solid #f0e6d2;
+        }
+
+        .actual-letter {
+            display: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+            color: #4a3728;
+        }
+
+        /* --- 6. Memory Gallery & 13. Polaroid Wall --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 30px 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transform: rotate(var(--r));
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 10;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        .polaroid .caption {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: #444;
+        }
+
+        /* Lightbox */
+        #lightbox {
+            position: fixed;
+            top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            border: 5px solid white;
+            border-radius: 4px;
+        }
+
+        /* --- 7. Timeline --- */
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px; background: var(--pink);
+            top: 0; bottom: 0; left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            text-align: right;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-item::after {
+            content: '❤️';
+            position: absolute;
+            width: 20px; height: 20px;
+            right: -14px; top: 15px;
+            background: var(--white);
+            z-index: 1;
+            font-size: 0.9rem;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        /* --- 8. Birthday Reasons --- */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .reason-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--rose-gold);
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        /* --- 10. Birthday Cake --- */
+        .cake-container {
+            margin: 40px auto;
+            position: relative;
+            width: 200px;
+            height: 250px;
+        }
+
+        .cake {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 120px;
+            background: #4a2711; /* Chocolate */
+            border-radius: 10px 10px 0 0;
+            box-shadow: inset 0 10px 0 #361c0c;
+        }
+
+        .frosting {
+            position: absolute;
+            top: 110px;
+            width: 200px;
+            height: 20px;
+            background: var(--pink);
+            border-radius: 0 0 10px 10px;
+        }
+
+        .candles-row {
+            position: absolute;
+            bottom: 120px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            padding: 0 10px;
+        }
+
+        .candle {
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(to top, var(--lavender), var(--white));
+            position: relative;
+        }
+
+        .flame {
+            width: 10px;
+            height: 15px;
+            background: #ff9d00;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -18px;
+            left: -2px;
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1); opacity: 0.9; }
+            100% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+        }
+
+        .flame.out {
+            display: none !important;
+        }
+
+        /* --- 11. Floating Wish Section --- */
+        .wish-box textarea {
+            width: 100%;
+            max-width: 500px;
+            height: 100px;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid var(--pink);
+            outline: none;
+            font-family: inherit;
+            resize: none;
+            margin-bottom: 15px;
+        }
+
+        /* --- 12. Favorite Things --- */
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .fav-card i {
+            font-size: 2rem;
+            color: var(--rose-gold);
+            margin-bottom: 15px;
+        }
+
+        /* --- 15. Birthday Quiz --- */
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .quiz-option {
+            display: block;
+            background: white;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border-radius: 30px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--pink);
+            background: var(--lavender);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        .quiz-option.wrong {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        /* --- 16. Surprise Gift Box --- */
+        .gift-box-container {
+            font-size: 5rem;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            display: inline-block;
+            margin: 30px 0;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .gift-reward {
+            display: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--rose-gold);
+            margin-top: 20px;
+        }
+
+        /* --- 17. Final Message --- */
+        #final-message {
+            background: radial-gradient(circle, rgba(44,26,48,1) 0%, rgba(20,10,22,1) 100%);
+            color: white;
+            padding: 100px 20px;
+            border-radius: 40px;
+            margin: 40px 20px;
+        }
+
+        #final-message h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--pink);
+        }
+
+        /* Tap to Heart Canvas Overlay */
+        #heart-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Responsive Layouts */
+        @media (max-width: 768px) {
+            #hero h1 { font-size: 2.8rem; }
+            .timeline-container::after { left: 40px; }
+            .timeline-item { width: 100%; text-align: left; padding-left: 70px; }
+            .timeline-item.right { left: 0; }
+            .timeline-item::after { left: 28px; right: auto; }
+            .timeline-item.right::after { left: 28px; }
+            .envelope-wrapper.open .letter-content { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- ============================================= -->
-<!-- PASSWORD GATE -->
-<!-- ============================================= -->
-<div id="gate" class="gate">
-  <div class="gate-card">
-    <div class="gate-sunflower">🌻</div>
-    <h1 class="gate-title">A little something for you</h1>
-    <p class="gate-subtitle">Enter the date to unlock it</p>
-    <form id="gate-form" autocomplete="off">
-      <input type="tel" inputmode="numeric" id="gate-input" maxlength="8" placeholder="DDMMYYYY" aria-label="Enter passcode">
-      <button type="submit">Unlock</button>
-    </form>
-    <p id="gate-error" class="gate-error" aria-live="polite"></p>
-  </div>
-</div>
+    <canvas id="heart-canvas"></canvas>
 
-<!-- ============================================= -->
-<!-- LOADING SCREEN -->
-<!-- ============================================= -->
-<div id="loader" class="loader hidden">
-  <div class="loader-inner">
-    <div class="loader-sunflower">🌻</div>
-    <h1 class="loader-title">Happy 18th Birthday <span class="heart-pulse">❤️</span></h1>
-    <div class="loader-bar"><div class="loader-fill"></div></div>
-  </div>
-</div>
-
-<!-- Ambient falling petals, present on every section behind content -->
-<div id="petal-layer" class="petal-layer" aria-hidden="true"></div>
-
-<!-- Floating hearts spawn here on tap -->
-<div id="heart-layer" class="heart-layer" aria-hidden="true"></div>
-
-<!-- Optional background music. Put an mp3 in assets/music/ and update the src below. -->
-<audio id="bg-music" src="assets/music/song.mp3" loop preload="none"></audio>
-<button id="music-toggle" class="music-toggle" aria-label="Toggle background music" title="Play music">🎵</button>
-
-<main id="site" class="site hidden">
-
-  <!-- ============================================= -->
-  <!-- HERO -->
-  <!-- ============================================= -->
-  <section id="hero" class="section hero">
-    <div class="hero-glow"></div>
-    <p class="eyebrow">for <span class="name-placeholder">Eishaaa</span></p>
-    <h1 class="hero-title">Happy 18th<br>Birthday</h1>
-    <p class="hero-subtitle">Let me make it the most special one</p>
-    <button id="open-surprise" class="btn-primary">
-      <span>Open Your Surprise</span>
-      <span class="btn-shine"></span>
-    </button>
-    <div class="scroll-hint" aria-hidden="true">↓ scroll</div>
-  </section>
-
-  <!-- ============================================= -->
-  <!-- COUNTDOWN -->
-  <!-- ============================================= -->
-  <section id="countdown-section" class="section countdown-section">
-    <p class="section-eyebrow">the wait is almost over</p>
-    <h2 class="section-title">Counting down to your day</h2>
-    <div id="countdown" class="countdown">
-      <div class="countdown-unit"><span id="cd-days">00</span><label>days</label></div>
-      <div class="countdown-unit"><span id="cd-hours">00</span><label>hours</label></div>
-      <div class="countdown-unit"><span id="cd-mins">00</span><label>mins</label></div>
-      <div class="countdown-unit"><span id="cd-secs">00</span><label>secs</label></div>
-    </div>
-    <p id="countdown-arrived" class="countdown-arrived hidden">It's your special day ❤️</p>
-  </section>
-
-  <!-- ============================================= -->
-  <!-- LOVE LETTER -->
-  <!-- ============================================= -->
-  <section id="letter-section" class="section letter-section">
-    <p class="section-eyebrow">something I've been meaning to say</p>
-    <h2 class="section-title">Open when you're ready</h2>
-    <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Open the letter">
-      <div class="envelope-back"></div>
-      <div class="envelope-letter">
-        <p class="letter-text">
-          Hey Eishaa, it's me — your secret admirer, who has three more years to wait for that YESSS,
-          and he's happy to wait, if it's for you. But today is the special day: the day such an amazing
-          and special person was born. Happy Birthday, my crybaby 🤍🌻. I hope you have an amazing day
-          ahead, and I hope you like all the gifts I'm going to give you — I can't wait to see your
-          reaction to some of them. Let me wish you again: HAPPY BIRTHDAY. You can ask me anything today
-          and I will do anything for you, as long as it's under my control. And don't worry, I'll make
-          this the most special day you've experienced in the last 18 years 😝😉
-        </p>
-      </div>
-      <div class="envelope-flap"></div>
-      <div class="envelope-front"></div>
-      <div class="envelope-seal">🌻</div>
-    </div>
-    <p class="envelope-hint">tap the envelope</p>
-  </section>
-
-  <!-- ============================================= -->
-  <!-- MEMORY GALLERY -->
-  <!-- ============================================= -->
-  <section id="gallery-section" class="section gallery-section">
-    <p class="section-eyebrow">our little archive</p>
-    <h2 class="section-title">Memory Gallery</h2>
-    <div id="gallery" class="gallery">
-      <!-- Replace src with your own photos in assets/photos/ -->
-      <button class="gallery-item" data-index="0"><img src="assets/photos/photo1.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
-      <button class="gallery-item" data-index="1"><img src="assets/photos/photo2.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
-      <button class="gallery-item" data-index="2"><img src="assets/photos/photo3.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
-      <button class="gallery-item" data-index="3"><img src="assets/photos/photo4.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
-      <button class="gallery-item" data-index="4"><img src="assets/photos/photo5.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
-      <button class="gallery-item" data-index="5"><img src="assets/photos/photo6.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
-    </div>
-  </section>
-
-  <!-- Lightbox -->
-  <div id="lightbox" class="lightbox hidden">
-    <button id="lightbox-close" class="lightbox-close" aria-label="Close">✕</button>
-    <button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Previous">‹</button>
-    <img id="lightbox-img" src="" alt="">
-    <button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Next">›</button>
-  </div>
-
-  <!-- ============================================= -->
-  <!-- TIMELINE -->
-  <!-- ============================================= -->
-  <section id="timeline-section" class="section timeline-section">
-    <p class="section-eyebrow">how we got here</p>
-    <h2 class="section-title">Our Timeline</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <h3>First Chat</h3>
-          <p>In our school park</p>
+    <div id="gatekeeper">
+        <div class="password-box" id="pass-stage">
+            <h2>Enter the Magic Code ❤️</h2>
+            <p style="font-size:0.85rem; margin-bottom:15px; color:#777;">Hint: Her Birthday (DDMMYYYY)</p>
+            <input type="password" id="pwd-input" placeholder="••••••••" maxlength="8">
+            <br>
+            <button class="btn" onclick="checkPassword()">Unlock</button>
         </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <h3>Special Memory</h3>
-          <p>Of us secretly meeting to see each other without anyone knowing</p>
+        <div id="loading-screen">
+            <div class="heart-loader"><i class="fa-solid fa-heart"></i></div>
+            <h1 style="font-family:'Playfair Display', serif; color: var(--rose-gold);">Happy 18th Birthday ❤️</h1>
         </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <h3>Today</h3>
-          <p>It's her birthday — the most special day</p>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- ============================================= -->
-  <!-- 100 REASONS -->
-  <!-- ============================================= -->
-  <section id="reasons-section" class="section reasons-section">
-    <p class="section-eyebrow">a running list</p>
-    <h2 class="section-title">100 Reasons Why I Love You</h2>
-    <p class="reasons-progress"><span id="reasons-count">0</span> of <span id="reasons-total">100</span> written so far</p>
-    <div id="reasons-grid" class="reasons-grid"></div>
-    <button id="reasons-more" class="btn-secondary hidden">Show more</button>
-  </section>
+    <div id="main-content">
 
-  <!-- ============================================= -->
-  <!-- BIRTHDAY CAKE -->
-  <!-- ============================================= -->
-  <section id="cake-section" class="section cake-section">
-    <p class="section-eyebrow">make a wish</p>
-    <h2 class="section-title">Blow the Candles</h2>
-    <div id="cake" class="cake">
-      <div class="cake-plate"></div>
-      <div class="cake-layer cake-layer-bottom"></div>
-      <div class="cake-drip"></div>
-      <div class="cake-layer cake-layer-top"></div>
-      <div id="candles" class="candles"></div>
+        <section id="hero" class="visible">
+            <h2>For Dearest</h2>
+            <h1>Eishaaaa</h1>
+            <p>Let me make it the most special one</p>
+            <button class="btn" onclick="scrollToSurprise()">Open Your Surprise</button>
+        </section>
+
+        <section id="countdown-sec">
+            <h2 class="section-title">The Big Moment</h2>
+            <div id="countdown-container">
+                <div class="time-box"><span id="days">00</span><label>Days</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Hours</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>Mins</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>Secs</label></div>
+            </div>
+            <h2 id="birthday-alert" style="display:none; color: var(--red); font-family: 'Great Vibes', cursive; font-size: 3rem;">It's your special day ❤️</h2>
+        </section>
+
+        <section id="love-letter">
+            <h2 class="section-title">A Message For You</h2>
+            <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
+                <div class="envelope-flap"></div>
+                <div class="letter-content">
+                    <div class="actual-letter" id="letter-text">
+                        Hey Eishaa its me your secret admirer who has to wait 3 more years for that YESSS and he's happy to wait if its FOR YOU... <br><br>
+                        But today its the special day... Your Birthday, The day such an amazing and special person was born... Happy Birthday My crybaby 🤍🌻... Hope you have an amazing day forward... <br><br>
+                        I hope you like all the gifts I am going to give you and I can't wait to see your reaction for some of them... let me wish you again HAPPY BIRTHDAY.... you can ask me anything today and I will do anything for you as long as its under my control... and don't worry I will make this day the most special one to have experienced in the last 18 years 😝😉
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2 class="section-title">Our Moments</h2>
+            <div class="gallery-grid">
+                <div class="polaroid" style="--r: -3deg;" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500" alt="Memory 1">
+                    <div class="caption">Beautiful Memories 🌻</div>
+                </div>
+                <div class="polaroid" style="--r: 4deg;" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Memory 2">
+                    <div class="caption">Laughs & Joy ✨</div>
+                </div>
+                <div class="polaroid" style="--r: -2deg;" onclick="openLightbox(this)">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" alt="Memory 3">
+                    <div class="caption">Forever Yours ❤️</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline">
+            <h2 class="section-title">Our Story</h2>
+            <div class="timeline-container">
+                <div class="timeline-item left card">
+                    <h3>FIRST CHAT</h3>
+                    <p>In our school park</p>
+                </div>
+                <div class="timeline-item right card">
+                    <h3>SPECIAL MEMORY</h3>
+                    <p>Of us secretly meeting to see each other without anyone knowing</p>
+                </div>
+                <div class="timeline-item left card">
+                    <h3>TODAY</h3>
+                    <p>Its her birthday - The most special day!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="reasons">
+            <h2 class="section-title">Reasons Why I Love You</h2>
+            <div class="reasons-grid" id="reasons-box">
+                </div>
+        </section>
+
+        <section id="cake-section">
+            <h2 class="section-title">Make A Wish</h2>
+            <div class="cake-container">
+                <div class="candles-row" id="candles-container"></div>
+                <div class="cake"></div>
+                <div class="frosting"></div>
+            </div>
+            <button class="btn" id="blow-btn" onclick="blowCandles()">Blow the Candles</button>
+            <h1 id="cake-greet" style="display:none; color: var(--rose-gold); margin-top:20px; font-family:'Great Vibes'; font-size:3.5rem;">Happy Birthday Eishaaa!</h1>
+        </section>
+
+        <section id="favorites">
+            <h2 class="section-title">Your Favorite Things</h2>
+            <div class="favorites-grid">
+                <div class="card fav-card"><i class="fa-solid fa-utensils"></i><h3>Food</h3><p>Pizza, Chatpapri, Chocolates</p></div>
+                <div class="card fav-card"><i class="fa-solid fa-music"></i><h3>Songs</h3><p>I Like Me Better, E Hawa, Tum Ho Toh, Jiyein Kyun</p></div>
+                <div class="card fav-card"><i class="fa-solid fa-film"></i><h3>Movies</h3><p>YJHD, To All the Boys I've Loved Before</p></div>
+                <div class="card fav-card"><i class="fa-solid fa-book"></i><h3>Books</h3><p>A Good Girl's Guide to Murder Trilogy</p></div>
+                <div class="card fav-card"><i class="fa-solid fa-seedling"></i><h3>Flowers</h3><p>Sunflower, Red & White Roses</p></div>
+                <div class="card fav-card"><i class="fa-solid fa-plane"></i><h3>Places</h3><p>Europe, New York</p></div>
+                <div class="card fav-card"><i class="fa-solid fa-palette"></i><h3>Hobbies</h3><p>Crochet, Drawing</p></div>
+            </div>
+        </section>
+
+        <section id="wish-input-sec">
+            <h2 class="section-title">Drop A Wish</h2>
+            <div class="card wish-box">
+                <textarea placeholder="WRITE YOUR WISH HERE..."></textarea>
+                <br>
+                <button class="btn" onclick="alert('Wish locked into my heart! ❤️')">Send Wish</button>
+            </div>
+        </section>
+
+        <section id="quiz">
+            <h2 class="section-title">How Well Do You Know Us?</h2>
+            <div class="card quiz-container" id="quiz-box">
+                </div>
+        </section>
+
+        <section id="gift">
+            <h2 class="section-title">A Virtual Delivery</h2>
+            <div class="gift-box-container" id="gift-box" onclick="openGift()">
+                <i class="fa-solid fa-box-open" style="color: var(--rose-gold);"></i>
+            </div>
+            <div class="gift-reward" id="reward-text">
+                🎁 Reward: You get beautiful earrings and a custom keychain!
+            </div>
+        </section>
+
+        <section id="final-message">
+            <h1>Lastly...</h1>
+            <p style="font-size: 1.5rem; max-width:700px; margin: 20px auto; font-family:'Playfair Display'; line-height:1.8;">
+                I will just say the happiesttt birthday to you eishaaa.... hope you feel a bit special this year... 🌻🌻
+            </p>
+        </section>
+
+        <footer>
+            <p>Made with ❤️ by Your Secret Admirer</p>
+        </footer>
     </div>
-    <button id="blow-btn" class="btn-primary">Blow the Candles</button>
-    <p id="cake-message" class="cake-message hidden">Happy Birthday, Eishaaa 🎂</p>
-  </section>
 
-  <!-- ============================================= -->
-  <!-- BIRTHDAY WISH -->
-  <!-- ============================================= -->
-  <section id="wish-section" class="section wish-section">
-    <p class="section-eyebrow">send it into the sky</p>
-    <h2 class="section-title">Make a Birthday Wish</h2>
-    <form id="wish-form" class="wish-form">
-      <input type="text" id="wish-input" placeholder="Write your wish here" maxlength="120" required>
-      <button type="submit">Release Wish</button>
-    </form>
-    <div id="wish-sky" class="wish-sky" aria-hidden="true"></div>
-  </section>
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src="" alt="View"></div>
 
-  <!-- ============================================= -->
-  <!-- FAVORITE THINGS -->
-  <!-- ============================================= -->
-  <section id="favorites-section" class="section favorites-section">
-    <p class="section-eyebrow">all the little details</p>
-    <h2 class="section-title">Favorite Things</h2>
-    <div class="favorites-grid">
-      <div class="favorite-card"><span class="favorite-icon">🍕</span><h3>Favorite Food</h3><p>Pizza, chatpapri, chocolates</p></div>
-      <div class="favorite-card"><span class="favorite-icon">🎵</span><h3>Favorite Songs</h3><p>I Like Me Better · E Hawa · Tum Ho Toh (Vishal Mishra) · Jiyein Kyun</p></div>
-      <div class="favorite-card"><span class="favorite-icon">🎬</span><h3>Favorite Movies</h3><p>Yeh Jawaani Hai Deewani · To All the Boys I've Loved Before</p></div>
-      <div class="favorite-card"><span class="favorite-icon">📖</span><h3>Favorite Books</h3><p>A Good Girl's Guide to Murder trilogy</p></div>
-      <div class="favorite-card"><span class="favorite-icon">🌻</span><h3>Favorite Flowers</h3><p>Sunflowers, red &amp; white roses</p></div>
-      <div class="favorite-card"><span class="favorite-icon">✈️</span><h3>Favorite Places</h3><p>Europe, New York</p></div>
-      <div class="favorite-card"><span class="favorite-icon">🧶</span><h3>Favorite Hobbies</h3><p>Crochet, drawing</p></div>
-    </div>
-  </section>
+    <script>
+        // 1. Verification Control
+        function checkPassword() {
+            const val = document.getElementById('pwd-input').value;
+            if(val === "09072008") {
+                document.getElementById('pass-stage').style.display = 'none';
+                const loader = document.getElementById('loading-screen');
+                loader.style.display = 'flex';
+                
+                setTimeout(() => {
+                    document.getElementById('gatekeeper').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('gatekeeper').style.display = 'none';
+                        document.getElementById('main-content').style.display = 'block';
+                        initCountdown();
+                        triggerScrollAnimations();
+                    }, 800);
+                }, 2000);
+            } else {
+                alert("Incorrect date structural password! Try again ❤️");
+            }
+        }
 
-  <!-- ============================================= -->
-  <!-- POLAROID WALL -->
-  <!-- ============================================= -->
-  <section id="polaroid-section" class="section polaroid-section">
-    <p class="section-eyebrow">pinned up, just for looking at</p>
-    <h2 class="section-title">Polaroid Wall</h2>
-    <div class="polaroid-wall">
-      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid1.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">us :)</p></div>
-      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid2.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">that day</p></div>
-      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid3.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">my favorite</p></div>
-      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid4.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">☆</p></div>
-    </div>
-  </section>
+        function scrollToSurprise() {
+            document.getElementById('countdown-sec').scrollIntoView();
+        }
 
-  <!-- ============================================= -->
-  <!-- QUIZ -->
-  <!-- ============================================= -->
-  <section id="quiz-section" class="section quiz-section">
-    <p class="section-eyebrow">just for fun</p>
-    <h2 class="section-title">How Well Do You Know Us?</h2>
-    <div id="quiz" class="quiz">
-      <div class="quiz-progress"><div id="quiz-progress-fill" class="quiz-progress-fill"></div></div>
-      <div id="quiz-question-wrap"></div>
-    </div>
-    <div id="quiz-result" class="quiz-result hidden">
-      <h3>Your Score</h3>
-      <p id="quiz-score-text"></p>
-      <p id="quiz-answer5-review" class="quiz-answer5-review"></p>
-    </div>
-  </section>
+        // 4. Countdown Timer Engine
+        function initCountdown() {
+            // Set Target Year automatically dynamically based on current context
+            const targetDate = new Date("July 9, 2026 00:00:00").getTime();
+            
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
 
-  <!-- ============================================= -->
-  <!-- GIFT BOX -->
-  <!-- ============================================= -->
-  <section id="gift-section" class="section gift-section">
-    <p class="section-eyebrow">one more thing</p>
-    <h2 class="section-title">A Little Surprise</h2>
-    <div id="gift-box" class="gift-box" role="button" tabindex="0" aria-label="Open the gift box">
-      <div class="gift-lid"></div>
-      <div class="gift-base"></div>
-      <div class="gift-ribbon-v"></div>
-      <div class="gift-ribbon-h"></div>
-      <div class="gift-bow">🎀</div>
-      <div class="gift-reveal">
-        <p>Earrings + a matching keychain, on their way to you 💍🔑</p>
-      </div>
-    </div>
-    <p class="gift-hint">tap to open</p>
-  </section>
+                if (diff <= 0) {
+                    clearInterval(timer);
+                    document.getElementById('countdown-container').style.display = 'none';
+                    document.getElementById('birthday-alert').style.display = 'block';
+                    return;
+                }
 
-  <!-- ============================================= -->
-  <!-- FINAL MESSAGE -->
-  <!-- ============================================= -->
-  <section id="final-section" class="section final-section">
-    <canvas id="fireworks-canvas"></canvas>
-    <div class="final-content">
-      <p class="final-flowers">🌻🌻</p>
-      <h2 class="final-title">Happiest Birthday, Eishaaa</h2>
-      <p class="final-text">I hope you feel a little bit special this year. Every bit of this was made with you in mind — from the first section to this last line.</p>
-      <p class="final-flowers">🌻🌻</p>
-    </div>
-  </section>
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-  <!-- ============================================= -->
-  <!-- FOOTER -->
-  <!-- ============================================= -->
-  <footer class="footer">
-    <p>Made with ❤️ by your secret admirer</p>
-  </footer>
+                document.getElementById('days').innerText = d < 10 ? '0'+d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0'+h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0'+m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0'+s : s;
+            }, 1000);
+        }
 
-</main>
+        // 5. Letter Animation
+        function openEnvelope() {
+            const env = document.getElementById('envelope');
+            env.classList.toggle('open');
+            const letter = document.getElementById('letter-text');
+            if(env.classList.contains('open')) {
+                setTimeout(() => { letter.style.display = 'block'; }, 300);
+            } else {
+                letter.style.display = 'none';
+            }
+        }
 
-<script src="script.js"></script>
+        // 6. Lightbox
+        function openLightbox(element) {
+            const imgUrl = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = imgUrl;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        // 8. Reasons Generation Engine
+        const reasonsData = [
+            "Her understanding nature even if she has to sideline herself.",
+            "The magical way her eyes light up whenever she talks about things she genuinely loves.",
+            "Her absolute purity of heart that makes everyone around her feel safe.",
+            "How she remains patient with me even when I am being completely chaotic.",
+            "Her unparalleled creative mindset and talent whenever she works on crochet or drawings.",
+            "The simple comfort of her voice that can instantly turn my worst days completely around.",
+            "Her silent resilience and inner strength that inspires me immensely every day.",
+            "The cute pout she makes when she gets slightly dramatic or becomes my favorite crybaby.",
+            "How deeply protective she is over the people she holds close to her heart.",
+            "Her care for her loved ones and doing everything in her power to make others feel loved."
+        ];
+
+        const reasonsBox = document.getElementById('reasons-box');
+        reasonsData.forEach((reason, index) => {
+            const div = document.createElement('div');
+            div.className = 'reason-card card';
+            div.innerHTML = `<strong>${index + 1}.</strong> ${reason}`;
+            reasonsBox.appendChild(div);
+        });
+
+        // 10. Cake Setup - Generate exactly 18 candles
+        const candlesContainer = document.getElementById('candles-container');
+        for(let i=0; i<18; i++) {
+            const candle = document.createElement('div');
+            candle.className = 'candle';
+            candle.innerHTML = '<div class="flame"></div>';
+            candlesContainer.appendChild(candle);
+        }
+
+        function blowCandles() {
+            const flames = document.querySelectorAll('.flame');
+            flames.forEach(f => f.classList.add('out'));
+            document.getElementById('cake-greet').style.display = 'block';
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+        }
+
+        // 15. Quiz Construction Block
+        const quizData = [
+            { q: "How was our first conversation like?", o: ["Normal school greetings", "In a park me telling her adult jokes", "Exchanging class lecture notebooks", "An awkward online argument"], a: 1 },
+            { q: "What first book I read after your recommendation?", o: ["A Good Girl's Guide to Murder", "Verity", "It Ends With Us", "The Silent Patient"], a: 1 },
+            { q: "Where was our first meeting outside school?", o: ["Local Coffee Shop", "In a mall for the brand zudio", "At a public library park", "Near the tuition center corner"], a: 1 },
+            { q: "When did your pagolesst knew he fell in love with you?", o: ["On New Year's Eve party", "On 15th August 2025 when she was fixing her hair in front of me on the last bench of our class", "The day she texted me first outside school", "When she wore a gorgeous custom dress"], a: 1 },
+            { q: "When did you realize you were also interested?", o: ["Type your own real response down below!", "Write it down when you meet!", "A mystery to solve!", "Share with him today!"], a: 0, open: true }
+        ];
+
+        const quizBox = document.getElementById('quiz-box');
+        let currentQ = 0;
+
+        function loadQuestion() {
+            if(currentQ >= quizData.length) {
+                quizBox.innerHTML = "<h3 style='text-align:center;'>Quiz Finished! You know us flawlessly! ❤️</h3>";
+                return;
+            }
+            const data = quizData[currentQ];
+            let html = `<p style="font-weight:600; margin-bottom:15px;">Question ${currentQ+1}: ${data.q}</p>`;
+            
+            if(data.open) {
+                html += `<input type="text" id="open-ans" placeholder="Type your answer here..." style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--pink); outline:none; margin-bottom:15px;"><br>
+                         <button class="btn" onclick="nextQuestion(true)">Submit Response</button>`;
+            } else {
+                data.o.forEach((option, idx) => {
+                    html += `<div class="quiz-option" onclick="handleAnswer(this, ${idx}, ${data.a})">${option}</div>`;
+                });
+            }
+            quizBox.innerHTML = html;
+        }
+        loadQuestion();
+
+        function handleAnswer(elem, chosen, correct) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+            if(chosen === correct) {
+                elem.classList.add('correct');
+                confetti({ particleCount: 50, spread: 40 });
+            } else {
+                elem.classList.add('wrong');
+                options[correct].classList.add('correct');
+            }
+            setTimeout(() => { currentQ++; loadQuestion(); }, 2000);
+        }
+
+        function nextQuestion(isOpen) {
+            if(isOpen) {
+                const answerUser = document.getElementById('open-ans').value;
+                if(!answerUser.trim()) { alert("Please type your answer!"); return; }
+                alert("Answer logged safely! Send a screenshot to him 😉");
+            }
+            currentQ++;
+            loadQuestion();
+        }
+
+        // 16. Gift Opening
+        function openGift() {
+            document.getElementById('gift-box').innerHTML = '<i class="fa-solid fa-box-open" style="color: var(--pink);"></i>';
+            document.getElementById('reward-text').style.display = 'block';
+            confetti({ particleCount: 100, spread: 70 });
+        }
+
+        // 9. Dynamic Interactive Hearts Engine
+        const canvas = document.getElementById('heart-canvas');
+        const ctx = canvas.getContext('2d');
+        let hearts = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        window.addEventListener('click', (e) => {
+            if(e.target.tagName === 'BUTTON' || e.target.closest('.card') || e.target.closest('.envelope-wrapper')) return;
+            for(let i=0; i<5; i++) {
+                hearts.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    size: Math.random() * 15 + 10,
+                    speedY: Math.random() * -3 - 2,
+                    speedX: Math.random() * 4 - 2,
+                    opacity: 1
+                });
+            }
+        });
+
+        function animateHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach((h, index) => {
+                h.y += h.speedY;
+                h.x += h.speedX;
+                h.opacity -= 0.015;
+                if(h.opacity <= 0) {
+                    hearts.splice(index, 1);
+                    return;
+                }
+                ctx.save();
+                ctx.globalAlpha = h.opacity;
+                ctx.fillStyle = `rgba(255, ${Math.floor(Math.random()*100)+100}, ${Math.floor(Math.random()*120)+130}, 1)`;
+                ctx.font = `${h.size}px Arial`;
+                ctx.fillText('❤️', h.x, h.y);
+                ctx.restore();
+            });
+            requestAnimationFrame(animateHearts);
+        }
+        animateHearts();
+
+        // Reveal Scroll Animation Engine
+        function triggerScrollAnimations() {
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+            sections.forEach(s => observer.observe(s));
+        }
+
+        // Firework system initialization on final footer display loop
+        setInterval(() => {
+            const finalSec = document.getElementById('final-message');
+            const rect = finalSec.getBoundingClientRect();
+            if(rect.top < window.innerHeight && rect.bottom >= 0) {
+                confetti({
+                    particleCount: 20,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+                confetti({
+                    particleCount: 20,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+            }
+        }, 2500);
+    </script>
 </body>
-      </html>
+</html>
+
