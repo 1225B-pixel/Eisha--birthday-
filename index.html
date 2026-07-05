@@ -269,16 +269,23 @@
             box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
         }
 
-        .envelope-wrapper.open .letter-content {
-            position: relative;
-            transform: translateY(-140px);
-            height: auto;
-            max-width: 600px;
-            margin: 0 auto;
-            z-index: 5;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            padding: 40px;
-            border: 1px solid #f0e6d2;
+        .envelope-wrapper.open {
+    margin-bottom: 420px; /* creates space before Our Moments */
+}
+
+.envelope-wrapper.open .letter-content {
+    position: absolute;
+    top: -330px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 650px;
+    height: auto;
+    padding: 40px;
+    z-index: 20;
+    background: #fffef0;
+    border: 1px solid #f0e6d2;
+    box-shadow: 0 15px 35px rgba(0,0,0,.15);
         }
 
         .actual-letter {
