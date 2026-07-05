@@ -38,13 +38,14 @@
 
         /* --- Global Utility Styles --- */
         section {
-            padding: 80px 20px;
+            padding: 100px 20px;
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
             opacity: 0;
             transform: translateY(40px);
             transition: all 1s ease-out;
+            clear: both;
         }
 
         section.visible {
@@ -56,7 +57,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             color: var(--rose-gold);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             position: relative;
             display: inline-block;
         }
@@ -155,7 +156,7 @@
             to { transform: scale(1.2); }
         }
 
-        /* --- Main Content Hidden Initially --- */
+        /* --- Main Content --- */
         #main-content {
             display: none;
         }
@@ -222,8 +223,13 @@
         }
 
         /* --- 5. Love Letter Section --- */
+        #love-letter {
+            min-height: 400px;
+            display: block;
+        }
+
         .envelope-wrapper {
-            margin: 40px auto;
+            margin: 40px auto 0 auto;
             position: relative;
             width: 300px;
             height: 200px;
@@ -265,7 +271,7 @@
 
         .envelope-wrapper.open .letter-content {
             position: relative;
-            transform: translateY(-120px);
+            transform: translateY(-140px);
             height: auto;
             max-width: 600px;
             margin: 0 auto;
@@ -284,40 +290,41 @@
             color: #4a3728;
         }
 
-        /* --- 6. Memory Gallery & 13. Polaroid Wall --- */
+        /* --- 6. Memory Gallery --- */
+        #gallery {
+            margin-top: 50px;
+            display: block;
+        }
+
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 35px;
             margin-top: 30px;
         }
 
         .polaroid {
             background: white;
-            padding: 15px 15px 30px 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            padding: 16px 16px 16px 16px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
             transform: rotate(var(--r));
             transition: all 0.3s ease;
             cursor: pointer;
+            border-radius: 2px;
         }
 
         .polaroid:hover {
             transform: rotate(0deg) scale(1.05);
             z-index: 10;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
         .polaroid img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
-            border: 1px solid #eee;
-        }
-
-        .polaroid .caption {
-            font-family: 'Great Vibes', cursive;
-            font-size: 1.5rem;
-            margin-top: 15px;
-            color: #444;
+            border: 1px solid #f5f5f5;
+            display: block;
         }
 
         /* Lightbox */
@@ -409,7 +416,7 @@
             bottom: 0;
             width: 200px;
             height: 120px;
-            background: #4a2711; /* Chocolate */
+            background: #4a2711; 
             border-radius: 10px 10px 0 0;
             box-shadow: inset 0 10px 0 #361c0c;
         }
@@ -486,6 +493,35 @@
             margin-bottom: 15px;
         }
 
+        /* --- 14. Dedicated Gifts Preview Section --- */
+        .gifts-display-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .gift-card-photo {
+            background: white;
+            padding: 15px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .gift-card-photo img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .gift-card-photo h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--rose-gold);
+            font-size: 1.2rem;
+        }
+
         /* --- 15. Birthday Quiz --- */
         .quiz-container {
             max-width: 600px;
@@ -559,7 +595,7 @@
             color: var(--pink);
         }
 
-        /* Tap to Heart Canvas Overlay */
+        /* Tap Overlay */
         #heart-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -593,7 +629,7 @@
     <div id="gatekeeper">
         <div class="password-box" id="pass-stage">
             <h2>Enter the Magic Code ❤️</h2>
-            <p style="font-size:0.85rem; margin-bottom:15px; color:#777;">Hint: Her Birthday (DDMMYYYY)</p>
+            <p style="font-size:0.85rem; margin-bottom:15px; color:#777;">Hint: Your Birthday (DDMMYYYY)</p>
             <input type="password" id="pwd-input" placeholder="••••••••" maxlength="8">
             <br>
             <button class="btn" onclick="checkPassword()">Unlock</button>
@@ -643,15 +679,12 @@
             <div class="gallery-grid">
                 <div class="polaroid" style="--r: -3deg;" onclick="openLightbox(this)">
                     <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500" alt="Memory 1">
-                    <div class="caption">Beautiful Memories 🌻</div>
                 </div>
                 <div class="polaroid" style="--r: 4deg;" onclick="openLightbox(this)">
                     <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500" alt="Memory 2">
-                    <div class="caption">Laughs & Joy ✨</div>
                 </div>
                 <div class="polaroid" style="--r: -2deg;" onclick="openLightbox(this)">
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500" alt="Memory 3">
-                    <div class="caption">Forever Yours ❤️</div>
                 </div>
             </div>
         </section>
@@ -669,15 +702,14 @@
                 </div>
                 <div class="timeline-item left card">
                     <h3>TODAY</h3>
-                    <p>Its her birthday - The most special day!</p>
+                    <p>Its your birthday - The most special day!</p>
                 </div>
             </div>
         </section>
 
         <section id="reasons">
             <h2 class="section-title">Reasons Why I Love You</h2>
-            <div class="reasons-grid" id="reasons-box">
-                </div>
+            <div class="reasons-grid" id="reasons-box"></div>
         </section>
 
         <section id="cake-section">
@@ -715,8 +747,21 @@
 
         <section id="quiz">
             <h2 class="section-title">How Well Do You Know Us?</h2>
-            <div class="card quiz-container" id="quiz-box">
+            <div class="card quiz-container" id="quiz-box"></div>
+        </section>
+
+        <section id="gift-previews">
+            <h2 class="section-title">Your Birthday Gifts</h2>
+            <div class="gifts-display-grid">
+                <div class="gift-card-photo card">
+                    <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500" alt="Earrings Placeholder">
+                    <h4>Elegant Earrings ✨</h4>
                 </div>
+                <div class="gift-card-photo card">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500" alt="Keychain Placeholder">
+                    <h4>Custom Keychain 🔑</h4>
+                </div>
+            </div>
         </section>
 
         <section id="gift">
@@ -744,7 +789,6 @@
     <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src="" alt="View"></div>
 
     <script>
-        // 1. Verification Control
         function checkPassword() {
             const val = document.getElementById('pwd-input').value;
             if(val === "09072008") {
@@ -770,9 +814,7 @@
             document.getElementById('countdown-sec').scrollIntoView();
         }
 
-        // 4. Countdown Timer Engine
         function initCountdown() {
-            // Set Target Year automatically dynamically based on current context
             const targetDate = new Date("July 9, 2026 00:00:00").getTime();
             
             const timer = setInterval(function() {
@@ -798,7 +840,6 @@
             }, 1000);
         }
 
-        // 5. Letter Animation
         function openEnvelope() {
             const env = document.getElementById('envelope');
             env.classList.toggle('open');
@@ -810,25 +851,23 @@
             }
         }
 
-        // 6. Lightbox
         function openLightbox(element) {
             const imgUrl = element.querySelector('img').src;
             document.getElementById('lightbox-img').src = imgUrl;
             document.getElementById('lightbox').style.display = 'flex';
         }
 
-        // 8. Reasons Generation Engine
         const reasonsData = [
-            "Her understanding nature even if she has to sideline herself.",
-            "The magical way her eyes light up whenever she talks about things she genuinely loves.",
-            "Her absolute purity of heart that makes everyone around her feel safe.",
-            "How she remains patient with me even when I am being completely chaotic.",
-            "Her unparalleled creative mindset and talent whenever she works on crochet or drawings.",
-            "The simple comfort of her voice that can instantly turn my worst days completely around.",
-            "Her silent resilience and inner strength that inspires me immensely every day.",
-            "The cute pout she makes when she gets slightly dramatic or becomes my favorite crybaby.",
-            "How deeply protective she is over the people she holds close to her heart.",
-            "Her care for her loved ones and doing everything in her power to make others feel loved."
+            "Your understanding nature even if you have to sideline yourself.",
+            "The magical way your eyes light up whenever you talk about things you genuinely love.",
+            "Your absolute purity of heart that makes everyone around you feel safe.",
+            "How you remain patient with me even when I am being completely chaotic.",
+            "Your unparalleled creative mindset and talent whenever you work on crochet or drawings.",
+            "The simple comfort of your voice that can instantly turn my worst days completely around.",
+            "Your silent resilience and inner strength that inspires me immensely every day.",
+            "The cute pout you make when you get slightly dramatic or becomes my favorite crybaby.",
+            "How deeply protective you are over the people you hold close to your heart.",
+            "Your care for your loved ones and doing everything in your power to make others feel loved."
         ];
 
         const reasonsBox = document.getElementById('reasons-box');
@@ -839,7 +878,6 @@
             reasonsBox.appendChild(div);
         });
 
-        // 10. Cake Setup - Generate exactly 18 candles
         const candlesContainer = document.getElementById('candles-container');
         for(let i=0; i<18; i++) {
             const candle = document.createElement('div');
@@ -855,12 +893,11 @@
             confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
         }
 
-        // 15. Quiz Construction Block
         const quizData = [
-            { q: "How was our first conversation like?", o: ["Normal school greetings", "In a park me telling her adult jokes", "Exchanging class lecture notebooks", "An awkward online argument"], a: 1 },
+            { q: "How was our first conversation like?", o: ["Normal school greetings", "In a park me telling you adult jokes", "Exchanging class lecture notebooks", "An awkward online argument"], a: 1 },
             { q: "What first book I read after your recommendation?", o: ["A Good Girl's Guide to Murder", "Verity", "It Ends With Us", "The Silent Patient"], a: 1 },
             { q: "Where was our first meeting outside school?", o: ["Local Coffee Shop", "In a mall for the brand zudio", "At a public library park", "Near the tuition center corner"], a: 1 },
-            { q: "When did your pagolesst knew he fell in love with you?", o: ["On New Year's Eve party", "On 15th August 2025 when she was fixing her hair in front of me on the last bench of our class", "The day she texted me first outside school", "When she wore a gorgeous custom dress"], a: 1 },
+            { q: "When did your pagolesst knew he fell in love with you?", o: ["On New Year's Eve party", "On 15th August 2025 when you were fixing your hair in front of me on the last bench of our class", "The day you texted me first outside school", "When you wore a gorgeous custom dress"], a: 1 },
             { q: "When did you realize you were also interested?", o: ["Type your own real response down below!", "Write it down when you meet!", "A mystery to solve!", "Share with him today!"], a: 0, open: true }
         ];
 
@@ -910,14 +947,12 @@
             loadQuestion();
         }
 
-        // 16. Gift Opening
         function openGift() {
             document.getElementById('gift-box').innerHTML = '<i class="fa-solid fa-box-open" style="color: var(--pink);"></i>';
             document.getElementById('reward-text').style.display = 'block';
             confetti({ particleCount: 100, spread: 70 });
         }
 
-        // 9. Dynamic Interactive Hearts Engine
         const canvas = document.getElementById('heart-canvas');
         const ctx = canvas.getContext('2d');
         let hearts = [];
@@ -930,7 +965,7 @@
         resizeCanvas();
 
         window.addEventListener('click', (e) => {
-            if(e.target.tagName === 'BUTTON' || e.target.closest('.card') || e.target.closest('.envelope-wrapper')) return;
+            if(e.target.tagName === 'BUTTON' || e.target.closest('.card') || e.target.closest('.envelope-wrapper') || e.target.closest('.polaroid')) return;
             for(let i=0; i<5; i++) {
                 hearts.push({
                     x: e.clientX,
@@ -964,7 +999,6 @@
         }
         animateHearts();
 
-        // Reveal Scroll Animation Engine
         function triggerScrollAnimations() {
             const sections = document.querySelectorAll('section');
             const observer = new IntersectionObserver((entries) => {
@@ -977,26 +1011,14 @@
             sections.forEach(s => observer.observe(s));
         }
 
-        // Firework system initialization on final footer display loop
         setInterval(() => {
             const finalSec = document.getElementById('final-message');
             const rect = finalSec.getBoundingClientRect();
             if(rect.top < window.innerHeight && rect.bottom >= 0) {
-                confetti({
-                    particleCount: 20,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 }
-                });
-                confetti({
-                    particleCount: 20,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 }
-                });
+                confetti({ particleCount: 20, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 20, angle: 120, spread: 55, origin: { x: 1 } });
             }
         }, 2500);
     </script>
 </body>
 </html>
-
