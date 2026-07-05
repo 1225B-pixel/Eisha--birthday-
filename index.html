@@ -3,342 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy 18th Birthday Eishaa ❤️</title>
+<title>Happy 18th Birthday, Eishaaa 🌻</title>
+<meta name="description" content="A birthday surprise, just for you.">
 
+<!-- Google Fonts: Cormorant Garamond (display), Quicksand (body), Dancing Script (handwritten accents) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-
-background:linear-gradient(135deg,#ffd6e7,#f6ddff,#ffffff);
-
-height:100vh;
-
-overflow:hidden;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-}
-
-.hidden{
-
-display:none;
-
-}
-
-#passwordPage,
-#loading,
-#hero{
-
-position:absolute;
-
-width:100%;
-
-height:100%;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-flex-direction:column;
-
-}
-
-#passwordPage{
-
-background:linear-gradient(135deg,#111,#000);
-
-}
-
-.passwordBox{
-
-width:90%;
-
-max-width:420px;
-
-padding:40px;
-
-background:rgba(255,255,255,.08);
-
-border-radius:25px;
-
-backdrop-filter:blur(18px);
-
-text-align:center;
-
-box-shadow:0 0 30px rgba(255,0,120,.4);
-
-}
-
-.passwordBox h1{
-
-font-family:"Great Vibes";
-
-font-size:60px;
-
-color:white;
-
-margin-bottom:15px;
-
-}
-
-.passwordBox p{
-
-color:#ddd;
-
-margin-bottom:25px;
-
-}
-
-.passwordBox input{
-
-width:100%;
-
-padding:15px;
-
-font-size:20px;
-
-text-align:center;
-
-border:none;
-
-border-radius:15px;
-
-margin-bottom:20px;
-
-}
-
-.passwordBox button{
-
-width:100%;
-
-padding:15px;
-
-border:none;
-
-border-radius:15px;
-
-background:#ff4f93;
-
-color:white;
-
-font-size:18px;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-.passwordBox button:hover{
-
-transform:scale(1.05);
-
-}
-
-#loading{
-
-display:none;
-
-background:black;
-
-color:white;
-
-}
-
-.loader{
-
-font-size:70px;
-
-animation:pulse 1s infinite;
-
-}
-
-@keyframes pulse{
-
-50%{
-
-transform:scale(1.3);
-
-}
-
-}
-
-#hero{
-
-display:none;
-
-text-align:center;
-
-padding:20px;
-
-}
-
-.heroTitle{
-
-font-family:"Great Vibes";
-
-font-size:65px;
-
-color:#ff2d75;
-
-}
-
-.heroSub{
-
-font-size:22px;
-
-margin-top:20px;
-
-color:#444;
-
-}
-
-.heroBtn{
-
-margin-top:45px;
-
-padding:18px 40px;
-
-border:none;
-
-border-radius:50px;
-
-background:#ff4f93;
-
-color:white;
-
-font-size:20px;
-
-cursor:pointer;
-
-}
-
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div id="passwordPage">
-
-<div class="passwordBox">
-
-<h1>Welcome ❤️</h1>
-
-<p>Enter the Secret Password</p>
-
-<input
-id="password"
-type="password"
-maxlength="8"
-placeholder="********">
-
-<button onclick="unlock()">
-
-Unlock Surprise
-
-</button>
-
+<!-- ============================================= -->
+<!-- PASSWORD GATE -->
+<!-- ============================================= -->
+<div id="gate" class="gate">
+  <div class="gate-card">
+    <div class="gate-sunflower">🌻</div>
+    <h1 class="gate-title">A little something for you</h1>
+    <p class="gate-subtitle">Enter the date to unlock it</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="tel" inputmode="numeric" id="gate-input" maxlength="8" placeholder="DDMMYYYY" aria-label="Enter passcode">
+      <button type="submit">Unlock</button>
+    </form>
+    <p id="gate-error" class="gate-error" aria-live="polite"></p>
+  </div>
 </div>
 
+<!-- ============================================= -->
+<!-- LOADING SCREEN -->
+<!-- ============================================= -->
+<div id="loader" class="loader hidden">
+  <div class="loader-inner">
+    <div class="loader-sunflower">🌻</div>
+    <h1 class="loader-title">Happy 18th Birthday <span class="heart-pulse">❤️</span></h1>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
+  </div>
 </div>
 
-<div id="loading">
+<!-- Ambient falling petals, present on every section behind content -->
+<div id="petal-layer" class="petal-layer" aria-hidden="true"></div>
 
-<div class="loader">
+<!-- Floating hearts spawn here on tap -->
+<div id="heart-layer" class="heart-layer" aria-hidden="true"></div>
 
-❤️
+<!-- Optional background music. Put an mp3 in assets/music/ and update the src below. -->
+<audio id="bg-music" src="assets/music/song.mp3" loop preload="none"></audio>
+<button id="music-toggle" class="music-toggle" aria-label="Toggle background music" title="Play music">🎵</button>
 
-</div>
+<main id="site" class="site hidden">
 
-<h2 style="margin-top:20px;font-family:'Great Vibes';font-size:45px;">
+  <!-- ============================================= -->
+  <!-- HERO -->
+  <!-- ============================================= -->
+  <section id="hero" class="section hero">
+    <div class="hero-glow"></div>
+    <p class="eyebrow">for <span class="name-placeholder">Eishaaa</span></p>
+    <h1 class="hero-title">Happy 18th<br>Birthday</h1>
+    <p class="hero-subtitle">Let me make it the most special one</p>
+    <button id="open-surprise" class="btn-primary">
+      <span>Open Your Surprise</span>
+      <span class="btn-shine"></span>
+    </button>
+    <div class="scroll-hint" aria-hidden="true">↓ scroll</div>
+  </section>
 
-Happy 18th Birthday ❤️
+  <!-- ============================================= -->
+  <!-- COUNTDOWN -->
+  <!-- ============================================= -->
+  <section id="countdown-section" class="section countdown-section">
+    <p class="section-eyebrow">the wait is almost over</p>
+    <h2 class="section-title">Counting down to your day</h2>
+    <div id="countdown" class="countdown">
+      <div class="countdown-unit"><span id="cd-days">00</span><label>days</label></div>
+      <div class="countdown-unit"><span id="cd-hours">00</span><label>hours</label></div>
+      <div class="countdown-unit"><span id="cd-mins">00</span><label>mins</label></div>
+      <div class="countdown-unit"><span id="cd-secs">00</span><label>secs</label></div>
+    </div>
+    <p id="countdown-arrived" class="countdown-arrived hidden">It's your special day ❤️</p>
+  </section>
 
-</h2>
+  <!-- ============================================= -->
+  <!-- LOVE LETTER -->
+  <!-- ============================================= -->
+  <section id="letter-section" class="section letter-section">
+    <p class="section-eyebrow">something I've been meaning to say</p>
+    <h2 class="section-title">Open when you're ready</h2>
+    <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Open the letter">
+      <div class="envelope-back"></div>
+      <div class="envelope-letter">
+        <p class="letter-text">
+          Hey Eishaa, it's me — your secret admirer, who has three more years to wait for that YESSS,
+          and he's happy to wait, if it's for you. But today is the special day: the day such an amazing
+          and special person was born. Happy Birthday, my crybaby 🤍🌻. I hope you have an amazing day
+          ahead, and I hope you like all the gifts I'm going to give you — I can't wait to see your
+          reaction to some of them. Let me wish you again: HAPPY BIRTHDAY. You can ask me anything today
+          and I will do anything for you, as long as it's under my control. And don't worry, I'll make
+          this the most special day you've experienced in the last 18 years 😝😉
+        </p>
+      </div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-front"></div>
+      <div class="envelope-seal">🌻</div>
+    </div>
+    <p class="envelope-hint">tap the envelope</p>
+  </section>
 
-</div>
+  <!-- ============================================= -->
+  <!-- MEMORY GALLERY -->
+  <!-- ============================================= -->
+  <section id="gallery-section" class="section gallery-section">
+    <p class="section-eyebrow">our little archive</p>
+    <h2 class="section-title">Memory Gallery</h2>
+    <div id="gallery" class="gallery">
+      <!-- Replace src with your own photos in assets/photos/ -->
+      <button class="gallery-item" data-index="0"><img src="assets/photos/photo1.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
+      <button class="gallery-item" data-index="1"><img src="assets/photos/photo2.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
+      <button class="gallery-item" data-index="2"><img src="assets/photos/photo3.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
+      <button class="gallery-item" data-index="3"><img src="assets/photos/photo4.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
+      <button class="gallery-item" data-index="4"><img src="assets/photos/photo5.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
+      <button class="gallery-item" data-index="5"><img src="assets/photos/photo6.jpg" alt="Photo I am adding" onerror="this.parentElement.classList.add('placeholder')"><span class="placeholder-label">Photo I am adding</span></button>
+    </div>
+  </section>
 
-<div id="hero">
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox hidden">
+    <button id="lightbox-close" class="lightbox-close" aria-label="Close">✕</button>
+    <button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Previous">‹</button>
+    <img id="lightbox-img" src="" alt="">
+    <button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Next">›</button>
+  </div>
 
-<h1 class="heroTitle">
+  <!-- ============================================= -->
+  <!-- TIMELINE -->
+  <!-- ============================================= -->
+  <section id="timeline-section" class="section timeline-section">
+    <p class="section-eyebrow">how we got here</p>
+    <h2 class="section-title">Our Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <h3>First Chat</h3>
+          <p>In our school park</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <h3>Special Memory</h3>
+          <p>Of us secretly meeting to see each other without anyone knowing</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <h3>Today</h3>
+          <p>It's her birthday — the most special day</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-Happy 18th Birthday
+  <!-- ============================================= -->
+  <!-- 100 REASONS -->
+  <!-- ============================================= -->
+  <section id="reasons-section" class="section reasons-section">
+    <p class="section-eyebrow">a running list</p>
+    <h2 class="section-title">100 Reasons Why I Love You</h2>
+    <p class="reasons-progress"><span id="reasons-count">0</span> of <span id="reasons-total">100</span> written so far</p>
+    <div id="reasons-grid" class="reasons-grid"></div>
+    <button id="reasons-more" class="btn-secondary hidden">Show more</button>
+  </section>
 
-<br>
+  <!-- ============================================= -->
+  <!-- BIRTHDAY CAKE -->
+  <!-- ============================================= -->
+  <section id="cake-section" class="section cake-section">
+    <p class="section-eyebrow">make a wish</p>
+    <h2 class="section-title">Blow the Candles</h2>
+    <div id="cake" class="cake">
+      <div class="cake-plate"></div>
+      <div class="cake-layer cake-layer-bottom"></div>
+      <div class="cake-drip"></div>
+      <div class="cake-layer cake-layer-top"></div>
+      <div id="candles" class="candles"></div>
+    </div>
+    <button id="blow-btn" class="btn-primary">Blow the Candles</button>
+    <p id="cake-message" class="cake-message hidden">Happy Birthday, Eishaaa 🎂</p>
+  </section>
 
-Eishaaaa ❤️
+  <!-- ============================================= -->
+  <!-- BIRTHDAY WISH -->
+  <!-- ============================================= -->
+  <section id="wish-section" class="section wish-section">
+    <p class="section-eyebrow">send it into the sky</p>
+    <h2 class="section-title">Make a Birthday Wish</h2>
+    <form id="wish-form" class="wish-form">
+      <input type="text" id="wish-input" placeholder="Write your wish here" maxlength="120" required>
+      <button type="submit">Release Wish</button>
+    </form>
+    <div id="wish-sky" class="wish-sky" aria-hidden="true"></div>
+  </section>
 
-</h1>
+  <!-- ============================================= -->
+  <!-- FAVORITE THINGS -->
+  <!-- ============================================= -->
+  <section id="favorites-section" class="section favorites-section">
+    <p class="section-eyebrow">all the little details</p>
+    <h2 class="section-title">Favorite Things</h2>
+    <div class="favorites-grid">
+      <div class="favorite-card"><span class="favorite-icon">🍕</span><h3>Favorite Food</h3><p>Pizza, chatpapri, chocolates</p></div>
+      <div class="favorite-card"><span class="favorite-icon">🎵</span><h3>Favorite Songs</h3><p>I Like Me Better · E Hawa · Tum Ho Toh (Vishal Mishra) · Jiyein Kyun</p></div>
+      <div class="favorite-card"><span class="favorite-icon">🎬</span><h3>Favorite Movies</h3><p>Yeh Jawaani Hai Deewani · To All the Boys I've Loved Before</p></div>
+      <div class="favorite-card"><span class="favorite-icon">📖</span><h3>Favorite Books</h3><p>A Good Girl's Guide to Murder trilogy</p></div>
+      <div class="favorite-card"><span class="favorite-icon">🌻</span><h3>Favorite Flowers</h3><p>Sunflowers, red &amp; white roses</p></div>
+      <div class="favorite-card"><span class="favorite-icon">✈️</span><h3>Favorite Places</h3><p>Europe, New York</p></div>
+      <div class="favorite-card"><span class="favorite-icon">🧶</span><h3>Favorite Hobbies</h3><p>Crochet, drawing</p></div>
+    </div>
+  </section>
 
-<p class="heroSub">
+  <!-- ============================================= -->
+  <!-- POLAROID WALL -->
+  <!-- ============================================= -->
+  <section id="polaroid-section" class="section polaroid-section">
+    <p class="section-eyebrow">pinned up, just for looking at</p>
+    <h2 class="section-title">Polaroid Wall</h2>
+    <div class="polaroid-wall">
+      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid1.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">us :)</p></div>
+      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid2.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">that day</p></div>
+      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid3.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">my favorite</p></div>
+      <div class="polaroid"><div class="polaroid-photo"><img src="assets/photos/polaroid4.jpg" alt="Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="placeholder-label placeholder-fill">PHOTO</span></div><p class="polaroid-caption">☆</p></div>
+    </div>
+  </section>
 
-Let me make it the most special one.
+  <!-- ============================================= -->
+  <!-- QUIZ -->
+  <!-- ============================================= -->
+  <section id="quiz-section" class="section quiz-section">
+    <p class="section-eyebrow">just for fun</p>
+    <h2 class="section-title">How Well Do You Know Us?</h2>
+    <div id="quiz" class="quiz">
+      <div class="quiz-progress"><div id="quiz-progress-fill" class="quiz-progress-fill"></div></div>
+      <div id="quiz-question-wrap"></div>
+    </div>
+    <div id="quiz-result" class="quiz-result hidden">
+      <h3>Your Score</h3>
+      <p id="quiz-score-text"></p>
+      <p id="quiz-answer5-review" class="quiz-answer5-review"></p>
+    </div>
+  </section>
 
-</p>
+  <!-- ============================================= -->
+  <!-- GIFT BOX -->
+  <!-- ============================================= -->
+  <section id="gift-section" class="section gift-section">
+    <p class="section-eyebrow">one more thing</p>
+    <h2 class="section-title">A Little Surprise</h2>
+    <div id="gift-box" class="gift-box" role="button" tabindex="0" aria-label="Open the gift box">
+      <div class="gift-lid"></div>
+      <div class="gift-base"></div>
+      <div class="gift-ribbon-v"></div>
+      <div class="gift-ribbon-h"></div>
+      <div class="gift-bow">🎀</div>
+      <div class="gift-reveal">
+        <p>Earrings + a matching keychain, on their way to you 💍🔑</p>
+      </div>
+    </div>
+    <p class="gift-hint">tap to open</p>
+  </section>
 
-<button class="heroBtn">
+  <!-- ============================================= -->
+  <!-- FINAL MESSAGE -->
+  <!-- ============================================= -->
+  <section id="final-section" class="section final-section">
+    <canvas id="fireworks-canvas"></canvas>
+    <div class="final-content">
+      <p class="final-flowers">🌻🌻</p>
+      <h2 class="final-title">Happiest Birthday, Eishaaa</h2>
+      <p class="final-text">I hope you feel a little bit special this year. Every bit of this was made with you in mind — from the first section to this last line.</p>
+      <p class="final-flowers">🌻🌻</p>
+    </div>
+  </section>
 
-Open Your Surprise
+  <!-- ============================================= -->
+  <!-- FOOTER -->
+  <!-- ============================================= -->
+  <footer class="footer">
+    <p>Made with ❤️ by your secret admirer</p>
+  </footer>
 
-</button>
+</main>
 
-</div>
-
-<script>
-
-function unlock(){
-
-let pass=document.getElementById("password").value;
-
-if(pass==="09072008"){
-
-document.getElementById("passwordPage").style.display="none";
-
-document.getElementById("loading").style.display="flex";
-
-setTimeout(function(){
-
-document.getElementById("loading").style.display="none";
-
-document.getElementById("hero").style.display="flex";
-
-},3000);
-
-}
-
-else{
-
-alert("Wrong Password ❤️");
-
-}
-
-}
-
-</script>
-
+<script src="script.js"></script>
 </body>
-
-</html>
+      </html>
