@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Happy 18th Birthday Eishaa ❤️</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,42 +16,26 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+html{
 scroll-behavior:smooth;
-font-family:'Poppins',sans-serif;
 }
 
 body{
 
-background:
-linear-gradient(135deg,#ffd6e7,#f7d9ff,#ffe7d4,#ffffff);
+background:linear-gradient(135deg,#ffd6e7,#f6ddff,#ffffff);
 
-overflow-x:hidden;
+height:100vh;
 
-color:#222;
-
-}
-
-section{
-
-min-height:100vh;
+overflow:hidden;
 
 display:flex;
 
 justify-content:center;
 
 align-items:center;
-
-padding:50px;
-
-}
-
-button{
-
-cursor:pointer;
-
-border:none;
-
-outline:none;
 
 }
 
@@ -62,64 +44,16 @@ outline:none;
 display:none;
 
 }
-body::before{
 
-content:"";
+#passwordPage,
+#loading,
+#hero{
 
-position:fixed;
-
-left:0;
-
-top:0;
+position:absolute;
 
 width:100%;
 
 height:100%;
-
-background:
-
-radial-gradient(circle at 10% 20%,rgba(255,255,255,.5),transparent 35%),
-
-radial-gradient(circle at 80% 10%,rgba(255,192,203,.35),transparent 40%),
-
-radial-gradient(circle at 50% 90%,rgba(255,215,230,.5),transparent 35%);
-
-animation:bgMove 12s linear infinite alternate;
-
-z-index:-2;
-
-}
-
-@keyframes bgMove{
-
-from{
-
-transform:translateY(-30px);
-
-}
-
-to{
-
-transform:translateY(30px);
-
-}
-
-  }
-#passwordPage{
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-width:100%;
-
-height:100%;
-
-background:
-
-linear-gradient(135deg,#111,#1e1e1e,#000);
 
 display:flex;
 
@@ -127,37 +61,43 @@ justify-content:center;
 
 align-items:center;
 
-z-index:9999;
+flex-direction:column;
+
+}
+
+#passwordPage{
+
+background:linear-gradient(135deg,#111,#000);
 
 }
 
 .passwordBox{
 
-background:rgba(255,255,255,.08);
-
-backdrop-filter:blur(18px);
-
-padding:40px;
-
-border-radius:25px;
-
 width:90%;
 
 max-width:420px;
 
+padding:40px;
+
+background:rgba(255,255,255,.08);
+
+border-radius:25px;
+
+backdrop-filter:blur(18px);
+
 text-align:center;
 
-box-shadow:0 0 40px rgba(255,105,180,.35);
+box-shadow:0 0 30px rgba(255,0,120,.4);
 
 }
 
 .passwordBox h1{
 
+font-family:"Great Vibes";
+
+font-size:60px;
+
 color:white;
-
-font-family:'Great Vibes',cursive;
-
-font-size:50px;
 
 margin-bottom:15px;
 
@@ -177,17 +117,15 @@ width:100%;
 
 padding:15px;
 
-border-radius:15px;
-
-border:none;
-
-margin-bottom:20px;
-
-font-size:18px;
+font-size:20px;
 
 text-align:center;
 
-letter-spacing:4px;
+border:none;
+
+border-radius:15px;
+
+margin-bottom:20px;
 
 }
 
@@ -197,15 +135,19 @@ width:100%;
 
 padding:15px;
 
-font-size:18px;
+border:none;
 
 border-radius:15px;
 
-background:#ff4d88;
+background:#ff4f93;
 
 color:white;
 
-transition:.4s;
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
 
 }
 
@@ -213,38 +155,19 @@ transition:.4s;
 
 transform:scale(1.05);
 
-background:#ff2f74;
+}
 
-  }
-  #loading{
-
-position:fixed;
-
-top:0;
-
-left:0;
-
-width:100%;
-
-height:100%;
-
-background:#000;
+#loading{
 
 display:none;
 
-justify-content:center;
-
-align-items:center;
-
-flex-direction:column;
-
-z-index:9998;
+background:black;
 
 color:white;
 
 }
 
-.loaderHeart{
+.loader{
 
 font-size:70px;
 
@@ -262,124 +185,105 @@ transform:scale(1.3);
 
 }
 
-.loadingText{
+#hero{
 
-margin-top:20px;
-
-font-size:30px;
-
-font-family:'Great Vibes';
-
-color:#ffd6e7;
-
-                }
-  #hero{
-
-position:relative;
+display:none;
 
 text-align:center;
 
-flex-direction:column;
-
-overflow:hidden;
+padding:20px;
 
 }
 
 .heroTitle{
 
-font-size:70px;
+font-family:"Great Vibes";
 
-font-family:'Great Vibes';
+font-size:65px;
 
-color:#ff2c75;
-
-text-shadow:0 5px 15px rgba(255,0,102,.2);
+color:#ff2d75;
 
 }
 
-.heroSubtitle{
-
-margin-top:20px;
+.heroSub{
 
 font-size:22px;
 
-color:#444;
+margin-top:20px;
 
-max-width:700px;
+color:#444;
 
 }
 
-.openBtn{
+.heroBtn{
 
-margin-top:50px;
+margin-top:45px;
 
-padding:18px 45px;
+padding:18px 40px;
 
-font-size:20px;
+border:none;
 
 border-radius:50px;
 
-background:
-
-linear-gradient(45deg,#ff2f74,#ff6da5);
+background:#ff4f93;
 
 color:white;
 
-box-shadow:0 15px 35px rgba(255,0,102,.25);
+font-size:20px;
 
-transition:.4s;
+cursor:pointer;
 
 }
 
-.openBtn:hover{
-
-transform:translateY(-5px) scale(1.05);
-
-  }
-  </style>
+</style>
 
 </head>
+
+<body>
+
 <div id="passwordPage">
 
 <div class="passwordBox">
 
 <h1>Welcome ❤️</h1>
 
-<p>Enter the secret password</p>
+<p>Enter the Secret Password</p>
 
 <input
-type="password"
 id="password"
+type="password"
 maxlength="8"
 placeholder="********">
 
-<button onclick="checkPassword()">
+<button onclick="unlock()">
+
 Unlock Surprise
+
 </button>
 
 </div>
 
 </div>
 
-
 <div id="loading">
 
-<div class="loaderHeart">
+<div class="loader">
+
 ❤️
+
 </div>
 
-<div class="loadingText">
+<h2 style="margin-top:20px;font-family:'Great Vibes';font-size:45px;">
 
 Happy 18th Birthday ❤️
 
-</div>
+</h2>
 
 </div>
 
+<div id="hero">
 
-<section id="hero" class="hidden">
-
-<h2 class="heroTitle">
+<h1 class="heroTitle">
 
 Happy 18th Birthday
 
@@ -387,26 +291,27 @@ Happy 18th Birthday
 
 Eishaaaa ❤️
 
-</h2>
+</h1>
 
-<p class="heroSubtitle">
+<p class="heroSub">
 
-Let me make it the most special one...
+Let me make it the most special one.
 
 </p>
 
-<button class="openBtn">
+<button class="heroBtn">
 
 Open Your Surprise
 
 </button>
 
-</section>
+</div>
+
 <script>
 
-function checkPassword(){
+function unlock(){
 
-const pass=document.getElementById("password").value;
+let pass=document.getElementById("password").value;
 
 if(pass==="09072008"){
 
@@ -414,11 +319,11 @@ document.getElementById("passwordPage").style.display="none";
 
 document.getElementById("loading").style.display="flex";
 
-setTimeout(()=>{
+setTimeout(function(){
 
 document.getElementById("loading").style.display="none";
 
-document.getElementById("hero").classList.remove("hidden");
+document.getElementById("hero").style.display="flex";
 
 },3000);
 
